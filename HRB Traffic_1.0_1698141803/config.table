@@ -1,0 +1,1574 @@
+{
+  ["web_control"]	= {
+      } ;
+  ["events"]	= {
+      ["收到新标题"]	= "--浏览器加载新页面并获得新标题时执行的事件\
+\
+--接收参数\
+浏览器对象，新标题=..." ;
+      ["程序启动"]	= "布局5=\
+{\
+  LinearLayout,\
+  orientation='vertical';--横向或者纵向布局\
+  layout_width='fill';--布局宽度\
+  layout_height='fill';--布局高度\
+  background='#ffffffff';--布局背景颜色\
+  id='wre';\
+\
+  {\
+    CardView;--卡片控件\
+    layout_margin='8dp';--边距\
+    layout_gravity='center';--重力\
+    --左:left 右:right 中:center 顶:top 底:bottom\
+    elevation='0dp';--阴影\
+    layout_width='fill';--宽度\
+    layout_height='10%h';--高度\
+    CardBackgroundColor='#ffffffff';--颜色\
+    radius='8dp';--圆角\
+  };\
+  {\
+    CardView;--卡片控件\
+    layout_margin='8dp';--边距\
+    layout_gravity='center';--重力\
+    --左:left 右:right 中:center 顶:top 底:bottom\
+    elevation='0dp';--阴影\
+    layout_width='100dp';--宽度\
+    layout_height='100dp';--高度\
+    CardBackgroundColor='#ffffffff';--颜色\
+    radius='8dp';--圆角\
+    {\
+      ImageView;--图片控件\
+      src='icon.png';--图片路径\
+      layout_width='fill';--图片宽度\
+      layout_height='fill';--图片高度\
+      scaleType='fitXY';--图片显示类型\
+    };\
+  };\
+  {\
+    CardView;--卡片控件\
+    layout_margin='0dp';--边距\
+    layout_gravity='center';--重力\
+    --左:left 右:right 中:center 顶:top 底:bottom\
+    elevation='0dp';--阴影\
+    layout_width='fill';--宽度\
+    layout_height='10%h';--高度\
+    CardBackgroundColor='#ffffffff';--颜色\
+    radius='8dp';--圆角\
+    {\
+      TextView;--文本控件\
+      layout_width='fill';--文本宽度\
+      layout_height='fill';--文本高度\
+      gravity='center';--重力属性\
+      textColor='#FF232323';--文字颜色\
+      text='HRB Traffic';--显示的文字\
+      textSize='22dp';--文字大小\
+    };\
+  };\
+  {\
+    CardView;--卡片控件\
+    layout_margin='0dp';--边距\
+    layout_gravity='center';--重力\
+    --左:left 右:right 中:center 顶:top 底:bottom\
+    elevation='0dp';--阴影\
+    layout_width='fill';--宽度\
+    layout_height='5%h';--高度\
+    CardBackgroundColor='#ffffffff';--颜色\
+    radius='8dp';--圆角\
+    {\
+      TextView;--文本控件\
+      layout_width='fill';--文本宽度\
+      layout_height='fill';--文本高度\
+      gravity='center';--重力属性\
+      textColor='#FF7D7E80';--文字颜色\
+      text='正在启动...';--显示的文字\
+      textSize='15dp';--文字大小\
+      id='加载项';\
+    };\
+  };\
+};\
+\
+    drawerLayout.getParent().addView(loadlayout(布局5))\
+\
+\
+加载项.setText(\"完成！\")\
+加载项.setText(\"正在获取设备屏幕尺寸信息\")\
+require \"import\"\
+import \"android.app.*\"\
+import \"android.os.*\"\
+import \"android.widget.*\"\
+import \"android.view.*\"\
+import \"android.content.Context\"\
+import \"android.content.Intent\"\
+import \"android.app.PendingIntent\"\
+import \"android.app.Notification\"\
+import \"android.content.Intent\"\
+import \"android.net.Uri\"\
+import \"android.provider.Settings\"\
+\
+import 'android.graphics.drawable.ShapeDrawable'\
+import 'android.graphics.RectF'\
+import \"android.app.ProgressDialog\"\
+import \"android.app.AlertDialog\"\
+local height=activity.getResources().getDimensionPixelSize(activity.getResources().getIdentifier(\"status_bar_height\",\"dimen\",\"android\"));\
+加载项.setText(\"完成！\")\
+加载项.setText(\"正在获取楼下页面接口\")\
+\
+加载项.setText(\"正在获取版本信息\")\
+\
+require \"import\"\
+import \"android.app.*\"\
+import \"android.os.*\"\
+import \"android.widget.*\"\
+import \"android.view.*\"\
+import \"android.content.Context\"\
+import \"android.content.Intent\"\
+import \"android.app.PendingIntent\"\
+import \"android.app.Notification\"\
+import \"android.content.Intent\"\
+import \"android.net.Uri\"\
+import \"android.provider.Settings\"\
+\
+import \"android.app.ProgressDialog\"\
+import \"android.app.AlertDialog\"\
+local packinfo = this.getPackageManager().getPackageInfo(this.getPackageName(),((32552732/2/2-8183)/10000-6-231)/9)\
+local appinfo = this.getPackageManager().getApplicationInfo(this.getPackageName(),0)\
+local versionName = tostring(packinfo.versionName)-- 版本名（cc.nowtime）\
+local versionCode= tonumber(packinfo.versionCode)-- 版本号（10010）\
+urla=\"https://share.weiyun.com/9iBzANlw\"--换自己的远程链接\
+Http.get(urla,nil,nil,nil,function(code,content)\
+  local 版本号=content:match(\"【hrb】(.-)【hrb】\")\
+\
+\
+  local f=io.open(\"/sdcard/HRB Traffic\",'r')\
+  if f~=nil\
+    then\
+   else\
+    import \"java.io.File\"--导入File类\
+    File(\"/sdcard/HRB Traffic\").mkdir()\
+  end\
+  local f=io.open(\"/sdcard/HRB Traffic/account.docx\",'r')\
+  if f~=nil\
+    then\
+   else\
+    io.open(\"/sdcard/HRB Traffic/account.docx\", 'w')\
+    local txt=\"【line1】未设置【line1】【way1】未设置【way1】【line2】未设置【line2】【way2】未设置【way2】【line3】未设置【line3】【way3】未设置【way3】\"\
+    io.open(\"/sdcard/HRB Traffic/account.docx\",\"w+\"):write(txt):close()\
+  end\
+\
+\
+  require \"import\"\
+  import \"android.app.*\"\
+  import \"android.os.*\"\
+  import \"android.widget.*\"\
+  import \"android.view.*\"\
+  import \"android.content.Context\"\
+  import \"android.content.Intent\"\
+  import \"android.app.PendingIntent\"\
+  import \"android.app.Notification\"\
+  for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+    local content=account\
+    local line1=content:match(\"【line1】(.-)【line1】\")\
+    local way1=content:match(\"【way1】(.-)【way1】\")\
+    local line2=content:match(\"【line2】(.-)【line2】\")\
+    local way2=content:match(\"【way2】(.-)【way2】\")\
+    local line3=content:match(\"【line3】(.-)【line3】\")\
+    local way3=content:match(\"【way3】(.-)【way3】\")\
+\
+\
+\
+    加载项.setText(\"完成！\")\
+\
+    布局3=\
+    {\
+      LinearLayout,\
+      orientation='vertical';--横向或者纵向布局\
+      layout_width='fill';--布局宽度\
+      layout_height='fill';--布局高度\
+      background=\"0\";--布局背景颜色\
+      id='ars';\
+      {\
+        LinearLayout,--线性布局\
+        orientation='vertical',--方向\
+        layout_width='fill',--宽度\
+        layout_height='fill',--高度\
+        background=\"#f1f3f5\",--背景颜色或图片路径\
+        id='ars';\
+\
+        {\
+          LinearLayout,\
+          orientation='vertical';--横向或者纵向布局\
+          layout_width='fill';--布局宽度\
+          layout_height='fill';--布局高度\
+          background=\"#f1f3f5\";--布局背景颜色\
+          id='ars';\
+          {\
+            ScrollView,\
+            layout_width=\"match_parent\";\
+            layout_height=\"match_parent\";\
+            VerticalScrollBarEnabled=false;\
+\
+            {\
+              LinearLayout;--线性布局\
+              Orientation='horizontal';--布局方向\
+              layout_width='match_parent';--布局宽度\
+              layout_height='match_parent';--布局高度\
+              background='#f1f3f5';--布局背景颜色\
+              id='ars';\
+\
+\
+              -- -----------左边竖布局开始--------------\
+              --左线程框架\
+              {\
+                LinearLayout;\
+                orientation=\"vertical\";\
+                layout_width=\"fill\";\
+                layout_height=\"match_parent\";\
+                layout_marginLeft=\"\";\
+\
+                {\
+                  CardView;--卡片控件\
+                  layout_margin='8dp';--边距\
+                  layout_gravity='center';--重力\
+                  --左:left 右:right 中:center 顶:top 底:bottom\
+                  elevation='0dp';--阴影\
+                  layout_width='fill';--宽度\
+                  layout_height='3%h';--高度\
+                  CardBackgroundColor='#f1f3f5';--颜色\
+                  radius='8dp';--圆角\
+                };\
+\
+\
+                {\
+                  ImageView;--图片控件\
+                  src='icon.png';--图片路径\
+                  layout_width='80dp';--图片宽度\
+                  layout_height='80dp';--图片高度\
+                  scaleType='fitXY';--图片显示类型\
+\
+                  layout_marginTop='20dp';--顶距\
+                  layout_gravity='center|top';--卡片重力\
+                  --左:left 右:right 中:center 顶:top 底:bottom\
+                  id='ABC';\
+\
+                };\
+\
+                {\
+                  CardView;--卡片控件\
+                  layout_margin='8dp';--边距\
+                  layout_gravity='center';--重力\
+                  --左:left 右:right 中:center 顶:top 底:bottom\
+                  elevation='0dp';--阴影\
+                  layout_width='fill';--宽度\
+                  layout_height='8%h';--高度\
+                  CardBackgroundColor='#f1f3f5';--颜色\
+                  radius='8dp';--圆角\
+                  layout_marginTop='0dp';--顶距\
+                  {\
+                    TextView;--文本控件\
+                    layout_width='fill';--文本宽度\
+                    layout_height='fill';--文本高度\
+\
+                    textColor='#FF8C8C8C';--文字颜色\
+                    text=\"欢迎使用\";--显示的文字\
+                    textSize='16dp';--文字大小\
+                    gravity='top|center';--重力属性\
+                    --左:left 右:right 中:center 顶:top 底:bottom\
+                    id='检查更新';\
+                  };\
+                  {\
+                    TextView;--文本控件\
+                    layout_width='fill';--文本宽度\
+                    layout_height='fill';--文本高度\
+                    gravity='bottom|center';--重力属性\
+                    textColor='#000000';--文字颜色\
+                    text=activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).applicationInfo.loadLabel(activity.getPackageManager());--显示的文字\
+                    textSize='23dp';--文字大小\
+                    id='ABC';\
+                  };\
+\
+                };\
+\
+\
+                {\
+                  TextView;--文本控件\
+                  layout_width='fill';--文本宽度\
+                  layout_height='3.5%h';--文本高度\
+                  gravity='center|left';--重力属性\
+                  textColor='#FF8C8C8C';--文字颜色\
+                  text='常用出行';--显示的文字\
+                  textSize='14dp';--文字大小\
+                  layout_margin='';--边距\
+                  layout_marginLeft='17dp';--左距\
+                };\
+                {\
+                  CardView;--卡片控件\
+                  layout_margin='';--边距\
+                  layout_marginLeft='13dp';--左距\
+                  layout_marginRight='13dp';--右距\
+                  layout_marginTop='';--顶距\
+                  layout_gravity='center';--重力\
+                  --左:left 右:right 中:center 顶:top 底:bottom\
+                  elevation='0dp';--阴影\
+                  layout_width='fill';--宽度\
+                  layout_height='24%h';--高度\
+                  CardBackgroundColor='#ffffffff';--颜色\
+                  radius='17dp';--圆角\
+                  {\
+                    CardView;--卡片控件\
+                    layout_margin='';--边距\
+                    layout_gravity='';--重力\
+                    --左:left 右:right 中:center 顶:top 底:bottom\
+                    elevation='0dp';--阴影\
+                    layout_width='fill';--宽度\
+                    layout_height='8%h';--高度\
+                    CardBackgroundColor='#ffffffff';--颜色\
+                    radius='';--圆角\
+                    id='a1';\
+                    {\
+                      TextView;--文本控件\
+                      layout_width='fill';--文本宽度\
+                      layout_height='fill';--文本高度\
+                      gravity='top|left';--重力属性\
+                      textColor='#000000';--文字颜色\
+                      text=line1..'路'..way1;--显示的文字\
+                      textSize='17dp';--文字大小\
+                      layout_margin='8dp';--边距\
+                      id='a1';\
+                    };\
+                    {\
+                      TextView;--文本控件\
+                      layout_width='fill';--文本宽度\
+                      layout_height='fill';--文本高度\
+                      gravity='left|center';--重力属性\
+                      textColor='#FF8C8C8C';--文字颜色\
+                      text='出行方案一';--显示的文字\
+                      textSize='11dp';--文字大小\
+                      layout_marginLeft='8dp';--左距\
+                      layout_marginTop='3.7%h';--顶距\
+                      id='a1';\
+\
+                    };\
+\
+\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='8dp';--边距\
+                      layout_gravity='center|right';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='22dp';--宽度\
+                      layout_height='22dp';--高度\
+                      CardBackgroundColor='0';--颜色\
+                      radius='';--圆角\
+\
+                      {\
+                        ImageView;--图片控件\
+                        src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                        layout_width='fill';--图片宽度\
+                        layout_height='fill';--图片高度\
+                        scaleType='fitXY';--图片显示类型\
+                        id='a1';\
+                      };\
+                    };\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='';--边距\
+                      layout_gravity='center|bottom';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='fill';--宽度\
+                      layout_height='1dp';--高度\
+                      CardBackgroundColor='#f1f3f5';--颜色\
+                      radius='';--圆角\
+                      layout_marginLeft='8dp';--左距\
+                      layout_marginRight='8dp';--右距\
+                    };\
+\
+                  };\
+                  ------------\
+                  {\
+                    CardView;--卡片控件\
+                    layout_margin='';--边距\
+                    layout_gravity='';--重力\
+                    layout_marginTop='8%h';--顶距\
+                    --左:left 右:right 中:center 顶:top 底:bottom\
+                    elevation='0dp';--阴影\
+                    layout_width='fill';--宽度\
+                    layout_height='8%h';--高度\
+                    CardBackgroundColor='#ffffffff';--颜色\
+                    radius='';--圆角\
+                    id='a2';\
+                    {\
+                      TextView;--文本控件\
+                      layout_width='fill';--文本宽度\
+                      layout_height='fill';--文本高度\
+                      gravity='top|left';--重力属性\
+                      textColor='#000000';--文字颜色\
+                      text=line2..'路'..way2;--显示的文字\
+                      textSize='17dp';--文字大小\
+                      layout_margin='8dp';--边距\
+                      id='a2';\
+                    };\
+                    {\
+                      TextView;--文本控件\
+                      layout_width='fill';--文本宽度\
+                      layout_height='fill';--文本高度\
+                      gravity='left|center';--重力属性\
+                      textColor='#FF8C8C8C';--文字颜色\
+                      text='出行方案二';--显示的文字\
+                      textSize='11dp';--文字大小\
+                      layout_marginLeft='8dp';--左距\
+                      layout_marginTop='3.7%h';--顶距\
+                      id='a2';\
+\
+                    };\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='8dp';--边距\
+                      layout_gravity='center|right';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='22dp';--宽度\
+                      layout_height='22dp';--高度\
+                      CardBackgroundColor='0';--颜色\
+                      radius='';--圆角\
+\
+                      {\
+                        ImageView;--图片控件\
+                        src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                        layout_width='fill';--图片宽度\
+                        layout_height='fill';--图片高度\
+                        scaleType='fitXY';--图片显示类型\
+                        id='a2';\
+                      };\
+                    };\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='';--边距\
+                      layout_gravity='center|bottom';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='fill';--宽度\
+                      layout_height='1dp';--高度\
+                      CardBackgroundColor='#f1f3f5';--颜色\
+                      radius='';--圆角\
+                      layout_marginLeft='8dp';--左距\
+                      layout_marginRight='8dp';--右距\
+                    };\
+\
+                  };\
+                  {\
+                    CardView;--卡片控件\
+                    layout_margin='';--边距\
+                    layout_gravity='';--重力\
+                    layout_marginTop='16%h';--顶距\
+                    --左:left 右:right 中:center 顶:top 底:bottom\
+                    elevation='0dp';--阴影\
+                    layout_width='fill';--宽度\
+                    layout_height='8%h';--高度\
+                    CardBackgroundColor='#ffffffff';--颜色\
+                    radius='';--圆角\
+                    id='a3';\
+                    {\
+                      TextView;--文本控件\
+                      layout_width='fill';--文本宽度\
+                      layout_height='fill';--文本高度\
+                      gravity='top|left';--重力属性\
+                      textColor='#000000';--文字颜色\
+                      text=line3..'路'..way3;--显示的文字\
+                      textSize='17dp';--文字大小\
+                      layout_margin='8dp';--边距\
+                      id='a3';\
+                    };\
+                    {\
+                      TextView;--文本控件\
+                      layout_width='fill';--文本宽度\
+                      layout_height='fill';--文本高度\
+                      gravity='left|center';--重力属性\
+                      textColor='#FF8C8C8C';--文字颜色\
+                      text='出行方案三';--显示的文字\
+                      textSize='11dp';--文字大小\
+                      layout_marginLeft='8dp';--左距\
+                      layout_marginTop='3.7%h';--顶距\
+                      id='a3';\
+\
+                    };\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='8dp';--边距\
+                      layout_gravity='center|right';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='22dp';--宽度\
+                      layout_height='22dp';--高度\
+                      CardBackgroundColor='0';--颜色\
+                      radius='';--圆角\
+\
+                      {\
+                        ImageView;--图片控件\
+                        src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                        layout_width='fill';--图片宽度\
+                        layout_height='fill';--图片高度\
+                        scaleType='fitXY';--图片显示类型\
+                        id='a3';\
+                      };\
+                    };\
+\
+\
+                  };\
+\
+\
+                };\
+                {\
+                  LinearLayout;\
+                  orientation=\"vertical\";\
+                  layout_width=\"fill\";\
+                  layout_height=\"match_parent\";\
+                  layout_marginLeft=\"\";\
+                  {\
+                    TextView;--文本控件\
+                    layout_width='fill';--文本宽度\
+                    layout_height='3.5%h';--文本高度\
+                    gravity='center|left';--重力属性\
+                    textColor='#FF8C8C8C';--文字颜色\
+                    text='常用出行设置';--显示的文字\
+                    textSize='14dp';--文字大小\
+                    layout_margin='';--边距\
+                    layout_marginLeft='17dp';--左距\
+                  };\
+                  {\
+                    CardView;--卡片控件\
+                    layout_margin='';--边距\
+                    layout_marginLeft='13dp';--左距\
+                    layout_marginRight='13dp';--右距\
+                    layout_marginTop='';--顶距\
+                    layout_gravity='center';--重力\
+                    --左:left 右:right 中:center 顶:top 底:bottom\
+                    elevation='0dp';--阴影\
+                    layout_width='fill';--宽度\
+                    layout_height='24%h';--高度\
+                    CardBackgroundColor='#ffffffff';--颜色\
+                    radius='17dp';--圆角\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='';--边距\
+                      layout_gravity='';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='fill';--宽度\
+                      layout_height='8%h';--高度\
+                      CardBackgroundColor='#ffffffff';--颜色\
+                      radius='';--圆角\
+                      id='s1';\
+                      {\
+                        TextView;--文本控件\
+                        layout_width='fill';--文本宽度\
+                        layout_height='fill';--文本高度\
+                        gravity='top|left';--重力属性\
+                        textColor='#000000';--文字颜色\
+                        text='设置出行方案一';--显示的文字\
+                        textSize='17dp';--文字大小\
+                        layout_margin='8dp';--边距\
+                        id='s1';\
+                      };\
+                      {\
+                        TextView;--文本控件\
+                        layout_width='fill';--文本宽度\
+                        layout_height='fill';--文本高度\
+                        gravity='left|center';--重力属性\
+                        textColor='#FF8C8C8C';--文字颜色\
+                        text='出行方案一';--显示的文字\
+                        textSize='11dp';--文字大小\
+                        layout_marginLeft='8dp';--左距\
+                        layout_marginTop='3.7%h';--顶距\
+                        id='s1';\
+\
+                      };\
+\
+\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='8dp';--边距\
+                        layout_gravity='center|right';--重力\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='22dp';--宽度\
+                        layout_height='22dp';--高度\
+                        CardBackgroundColor='0';--颜色\
+                        radius='';--圆角\
+\
+                        {\
+                          ImageView;--图片控件\
+                          src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                          layout_width='fill';--图片宽度\
+                          layout_height='fill';--图片高度\
+                          scaleType='fitXY';--图片显示类型\
+                          id='s1';\
+                        };\
+                      };\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='';--边距\
+                        layout_gravity='center|bottom';--重力\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='fill';--宽度\
+                        layout_height='1dp';--高度\
+                        CardBackgroundColor='#f1f3f5';--颜色\
+                        radius='';--圆角\
+                        layout_marginLeft='8dp';--左距\
+                        layout_marginRight='8dp';--右距\
+                      };\
+\
+                    };\
+                    ------------\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='';--边距\
+                      layout_gravity='';--重力\
+                      layout_marginTop='8%h';--顶距\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='fill';--宽度\
+                      layout_height='8%h';--高度\
+                      CardBackgroundColor='#ffffffff';--颜色\
+                      radius='';--圆角\
+                      id='s2';\
+                      {\
+                        TextView;--文本控件\
+                        layout_width='fill';--文本宽度\
+                        layout_height='fill';--文本高度\
+                        gravity='top|left';--重力属性\
+                        textColor='#000000';--文字颜色\
+                        text='设置出行方案二';--显示的文字\
+                        textSize='17dp';--文字大小\
+                        layout_margin='8dp';--边距\
+                        id='s2';\
+                      };\
+                      {\
+                        TextView;--文本控件\
+                        layout_width='fill';--文本宽度\
+                        layout_height='fill';--文本高度\
+                        gravity='left|center';--重力属性\
+                        textColor='#FF8C8C8C';--文字颜色\
+                        text='出行方案二';--显示的文字\
+                        textSize='11dp';--文字大小\
+                        layout_marginLeft='8dp';--左距\
+                        layout_marginTop='3.7%h';--顶距\
+                        id='s2';\
+\
+                      };\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='8dp';--边距\
+                        layout_gravity='center|right';--重力\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='22dp';--宽度\
+                        layout_height='22dp';--高度\
+                        CardBackgroundColor='0';--颜色\
+                        radius='';--圆角\
+\
+                        {\
+                          ImageView;--图片控件\
+                          src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                          layout_width='fill';--图片宽度\
+                          layout_height='fill';--图片高度\
+                          scaleType='fitXY';--图片显示类型\
+                          id='s2';\
+                        };\
+                      };\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='';--边距\
+                        layout_gravity='center|bottom';--重力\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='fill';--宽度\
+                        layout_height='1dp';--高度\
+                        CardBackgroundColor='#f1f3f5';--颜色\
+                        radius='';--圆角\
+                        layout_marginLeft='8dp';--左距\
+                        layout_marginRight='8dp';--右距\
+                      };\
+\
+\
+                    };\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='';--边距\
+                      layout_gravity='';--重力\
+                      layout_marginTop='16%h';--顶距\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='fill';--宽度\
+                      layout_height='8%h';--高度\
+                      CardBackgroundColor='#ffffffff';--颜色\
+                      radius='';--圆角\
+                      id='s3';\
+                      {\
+                        TextView;--文本控件\
+                        layout_width='fill';--文本宽度\
+                        layout_height='fill';--文本高度\
+                        gravity='top|left';--重力属性\
+                        textColor='#000000';--文字颜色\
+                        text='设置出行方案三';--显示的文字\
+                        textSize='17dp';--文字大小\
+                        layout_margin='8dp';--边距\
+                        id='s3';\
+                      };\
+                      {\
+                        TextView;--文本控件\
+                        layout_width='fill';--文本宽度\
+                        layout_height='fill';--文本高度\
+                        gravity='left|center';--重力属性\
+                        textColor='#FF8C8C8C';--文字颜色\
+                        text='出行方案三';--显示的文字\
+                        textSize='11dp';--文字大小\
+                        layout_marginLeft='8dp';--左距\
+                        layout_marginTop='3.7%h';--顶距\
+                        id='s3';\
+\
+                      };\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='8dp';--边距\
+                        layout_gravity='center|right';--重力\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='22dp';--宽度\
+                        layout_height='22dp';--高度\
+                        CardBackgroundColor='0';--颜色\
+                        radius='';--圆角\
+\
+                        {\
+                          ImageView;--图片控件\
+                          src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                          layout_width='fill';--图片宽度\
+                          layout_height='fill';--图片高度\
+                          scaleType='fitXY';--图片显示类型\
+                          id='svertical3';\
+                        };\
+                      };\
+\
+\
+                    };\
+\
+\
+                  };\
+                  {\
+                    LinearLayout;\
+                    orientation=\"vertical\";\
+                    layout_width=\"fill\";\
+                    layout_height=\"match_parent\";\
+                    layout_marginLeft=\"\";\
+                    {\
+                      TextView;--文本控件\
+                      layout_width='fill';--文本宽度\
+                      layout_height='3.5%h';--文本高度\
+                      gravity='center|left';--重力属性\
+                      textColor='#FF8C8C8C';--文字颜色\
+                      text='常规';--显示的文字\
+                      textSize='14dp';--文字大小\
+                      layout_margin='';--边距\
+                      layout_marginLeft='17dp';--左距\
+                    };\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='';--边距\
+                      layout_marginLeft='13dp';--左距\
+                      layout_marginRight='13dp';--右距\
+                      layout_marginTop='';--顶距\
+                      layout_gravity='center';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='fill';--宽度\
+                      layout_height='24%h';--高度\
+                      CardBackgroundColor='#ffffffff';--颜色\
+                      radius='17dp';--圆角\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='';--边距\
+                        layout_gravity='';--重力\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='fill';--宽度\
+                        layout_height='8%h';--高度\
+                        CardBackgroundColor='#ffffffff';--颜色\
+                        radius='';--圆角\
+                        id='a4';\
+                        {\
+                          TextView;--文本控件\
+                          layout_width='fill';--文本宽度\
+                          layout_height='fill';--文本高度\
+                          gravity='top|left';--重力属性\
+                          textColor='#000000';--文字颜色\
+                          text='哈尔滨公交行';--显示的文字\
+                          textSize='17dp';--文字大小\
+                          layout_margin='8dp';--边距\
+                          id='a4';\
+                        };\
+                        {\
+                          TextView;--文本控件\
+                          layout_width='fill';--文本宽度\
+                          layout_height='fill';--文本高度\
+                          gravity='left|center';--重力属性\
+                          textColor='#FF8C8C8C';--文字颜色\
+                          text='推荐使用';--显示的文字\
+                          textSize='11dp';--文字大小\
+                          layout_marginLeft='8dp';--左距\
+                          layout_marginTop='3.7%h';--顶距\
+                          id='a4';\
+\
+                        };\
+\
+\
+                        {\
+                          CardView;--卡片控件\
+                          layout_margin='8dp';--边距\
+                          layout_gravity='center|right';--重力\
+                          --左:left 右:right 中:center 顶:top 底:bottom\
+                          elevation='0dp';--阴影\
+                          layout_width='22dp';--宽度\
+                          layout_height='22dp';--高度\
+                          CardBackgroundColor='0';--颜色\
+                          radius='';--圆角\
+\
+                          {\
+                            ImageView;--图片控件\
+                            src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                            layout_width='fill';--图片宽度\
+                            layout_height='fill';--图片高度\
+                            scaleType='fitXY';--图片显示类型\
+                            id='a4';\
+                          };\
+                        };\
+                        {\
+                          CardView;--卡片控件\
+                          layout_margin='';--边距\
+                          layout_gravity='center|bottom';--重力\
+                          --左:left 右:right 中:center 顶:top 底:bottom\
+                          elevation='0dp';--阴影\
+                          layout_width='fill';--宽度\
+                          layout_height='1dp';--高度\
+                          CardBackgroundColor='#f1f3f5';--颜色\
+                          radius='';--圆角\
+                          layout_marginLeft='8dp';--左距\
+                          layout_marginRight='8dp';--右距\
+                        };\
+\
+                      };\
+                      ------------\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='';--边距\
+                        layout_gravity='';--重力\
+                        layout_marginTop='8%h';--顶距\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='fill';--宽度\
+                        layout_height='8%h';--高度\
+                        CardBackgroundColor='#ffffffff';--颜色\
+                        radius='';--圆角\
+                        id='a5';\
+                        {\
+                          TextView;--文本控件\
+                          layout_width='fill';--文本宽度\
+                          layout_height='fill';--文本高度\
+                          gravity='top|left';--重力属性\
+                          textColor='#000000';--文字颜色\
+                          text='哈尔滨交通出行';--显示的文字\
+                          textSize='17dp';--文字大小\
+                          layout_margin='8dp';--边距\
+                          id='a5';\
+                        };\
+                        {\
+                          TextView;--文本控件\
+                          layout_width='fill';--文本宽度\
+                          layout_height='fill';--文本高度\
+                          gravity='left|center';--重力属性\
+                          textColor='#FF8C8C8C';--文字颜色\
+                          text='敬请期待';--显示的文字\
+                          textSize='11dp';--文字大小\
+                          layout_marginLeft='8dp';--左距\
+                          layout_marginTop='3.7%h';--顶距\
+                          id='a5';\
+\
+                        };\
+                        {\
+                          CardView;--卡片控件\
+                          layout_margin='8dp';--边距\
+                          layout_gravity='center|right';--重力\
+                          --左:left 右:right 中:center 顶:top 底:bottom\
+                          elevation='0dp';--阴影\
+                          layout_width='22dp';--宽度\
+                          layout_height='22dp';--高度\
+                          CardBackgroundColor='0';--颜色\
+                          radius='';--圆角\
+\
+                          {\
+                            ImageView;--图片控件\
+                            src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                            layout_width='fill';--图片宽度\
+                            layout_height='fill';--图片高度\
+                            scaleType='fitXY';--图片显示类型\
+                            id='a5';\
+                          };\
+                        };\
+                        {\
+                          CardView;--卡片控件\
+                          layout_margin='';--边距\
+                          layout_gravity='center|bottom';--重力\
+                          --左:left 右:right 中:center 顶:top 底:bottom\
+                          elevation='0dp';--阴影\
+                          layout_width='fill';--宽度\
+                          layout_height='1dp';--高度\
+                          CardBackgroundColor='#f1f3f5';--颜色\
+                          radius='';--圆角\
+                          layout_marginLeft='8dp';--左距\
+                          layout_marginRight='8dp';--右距\
+                        };\
+\
+                      };\
+                      {\
+                        CardView;--卡片控件\
+                        layout_margin='';--边距\
+                        layout_gravity='';--重力\
+                        layout_marginTop='16%h';--顶距\
+                        --左:left 右:right 中:center 顶:top 底:bottom\
+                        elevation='0dp';--阴影\
+                        layout_width='fill';--宽度\
+                        layout_height='8%h';--高度\
+                        CardBackgroundColor='#ffffffff';--颜色\
+                        radius='';--圆角\
+                        id='a6';\
+                        {\
+                          TextView;--文本控件\
+                          layout_width='fill';--文本宽度\
+                          layout_height='fill';--文本高度\
+                          gravity='top|left';--重力属性\
+                          textColor='#000000';--文字颜色\
+                          text='地图';--显示的文字\
+                          textSize='17dp';--文字大小\
+                          layout_margin='8dp';--边距\
+                          id='a6';\
+                        };\
+                        {\
+                          TextView;--文本控件\
+                          layout_width='fill';--文本宽度\
+                          layout_height='fill';--文本高度\
+                          gravity='left|center';--重力属性\
+                          textColor='#FF8C8C8C';--文字颜色\
+                          text='敬请期待';--显示的文字\
+                          textSize='11dp';--文字大小\
+                          layout_marginLeft='8dp';--左距\
+                          layout_marginTop='3.7%h';--顶距\
+                          id='a6';\
+\
+                        };\
+                        {\
+                          CardView;--卡片控件\
+                          layout_margin='8dp';--边距\
+                          layout_gravity='center|right';--重力\
+                          --左:left 右:right 中:center 顶:top 底:bottom\
+                          elevation='0dp';--阴影\
+                          layout_width='22dp';--宽度\
+                          layout_height='22dp';--高度\
+                          CardBackgroundColor='0';--颜色\
+                          radius='';--圆角\
+\
+                          {\
+                            ImageView;--图片控件\
+                            src='http://wp.wadg.pro/view.php/332b0971bbe6511ea8cab46f44584e6e.png';--图片路径\
+                            layout_width='fill';--图片宽度\
+                            layout_height='fill';--图片高度\
+                            scaleType='fitXY';--图片显示类型\
+                            id='a6';\
+                          };\
+                        };\
+\
+\
+                      };\
+\
+\
+                    };\
+                    {\
+                      CardView;--卡片控件\
+                      layout_margin='8dp';--边距\
+                      layout_gravity='center';--重力\
+                      --左:left 右:right 中:center 顶:top 底:bottom\
+                      elevation='0dp';--阴影\
+                      layout_width='fill';--宽度\
+                      layout_height='5%h';--高度\
+                      CardBackgroundColor='#f1f3f5';--颜色\
+                      radius='8dp';--圆角\
+                    };\
+                  };\
+\
+\
+                };\
+\
+\
+\
+              };\
+            };\
+          };\
+        };\
+      };\
+    };\
+  end\
+\
+\
+\
+    drawerLayout.getParent().addView(loadlayout(布局3))\
+\
+  wre.setVisibility(View.GONE)\
+\
+\
+  if tostring(versionCode)<tostring(版本号) then\
+\
+\
+    dialog=AlertDialog.Builder(this)\
+    .setTitle(\"新版本引入？\")\
+    .setMessage(\"一个更新的版本可能会更稳定，修复一些已知问题，并可能带来一些您期待已久的新功能，推荐您更新！\")\
+    .setPositiveButton(\"现在就开始吧\",{onClick=function(v)\
+        --复制链接查看内容\
+        --格式:【布局】放代码地方【布局】\
+        print\"...正在启动...\"\
+        print\"若界面加载不全，系服务器连接缓慢，您可以退出重进页面\"\
+        url=\"https://wds.ecsxs.com/220335.html\"\
+        Http.get(url,nil,\"UTF-8\",nil,function(code,content,cookie,header)\
+          if(code==200 and content)then\
+            --过滤\
+\
+            远程布局=content:match(\"【布局】(.-)【布局】\")\
+            local status,error=pcall(loadstring(远程布局))\
+            if not status then--交流群：1149691044\
+              print(\"错误，网络链接失败\",error)\
+            end\
+          end\
+    end) ;end})\
+    .setNegativeButton(\"稍候再提醒我\",{onClick=function(v) print\"您可以退出后在此进入APP检测更新，或在侧滑栏设置中检查更新\";end})\
+    .show()\
+    dialog.create()\
+\
+    import \"android.graphics.Color\"\
+    dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(0xff1761e8)\
+    dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(0xff1761e8)\
+    dialog.getButton(dialog.BUTTON_NEUTRAL).setTextColor(0xff1761e8)\
+\
+   else\
+\
+\
+\
+  end\
+\
+dialog=AlertDialog.Builder(this)\
+    .setTitle(\"使用移动数据网络在本软件以获得更好体验\")\
+    .setMessage(\"我们想让您连接并使用移动数据网络，并暂时关闭无线局域网络。\")\
+    .setPositiveButton(\"无线局域网络设置\",{onClick=function(v)\
+import \"android.content.Intent\"\
+import \"android.provider.Settings\"\
+intent = Intent(Settings.ACTION_WIFI_SETTINGS)\
+activity.startActivity(intent)\
+     ;end})\
+ .setNegativeButton(\"移动数据网络设置\",{onClick=function(v)import \"android.content.Intent\"\
+import \"android.provider.Settings\"\
+intent = Intent(Settings.ACTION_DATA_ROAMING_SETTINGS)\
+activity.startActivity(intent);end})\
+  \
+    .setNeutralButton(\"稍候再提醒我\",{onClick=function(v)print\"如果您出现了页面加载缓慢，页面加载乱码，页面加载报错，页面加载白屏，请尝试刷新页面或使用移动数据网络\" ;end})\
+    .show()\
+    dialog.create()\
+\
+    import \"android.graphics.Color\"\
+    dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(0xff1761e8)\
+    dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(0xff1761e8)\
+    dialog.getButton(dialog.BUTTON_NEUTRAL).setTextColor(0xff1761e8)\
+\
+--[[\
+字段列表:\
+ACTION_SETTINGS 系统设置\
+CTION_APN_SETTINGS APN设置\
+ACTION_LOCATION_SOURCE_SETTINGS 位置和访问信息\
+ACTION_WIRELESS_SETTINGS 网络设置\
+ACTION_AIRPLANE_MODE_SETTINGS 无线和网络热点设置\
+ACTION_SECURITY_SETTINGS 位置和安全设置\
+ACTION_WIFI_SETTINGS 无线网WIFI设置\
+ACTION_WIFI_IP_SETTINGS 无线网IP设置\
+ACTION_BLUETOOTH_SETTINGS 蓝牙设置\
+ACTION_DATE_SETTINGS 时间和日期设置\
+ACTION_SOUND_SETTINGS 声音设置\
+ACTION_DISPLAY_SETTINGS 显示设置——字体大小等\
+ACTION_LOCALE_SETTINGS 语言设置\
+ACTION_INPUT_METHOD_SETTINGS 输入法设置\
+ACTION_USER_DICTIONARY_SETTINGS 用户词典\
+ACTION_APPLICATION_SETTINGS 应用程序设置\
+ACTION_APPLICATION_DEVELOPMENT_SETTINGS 应用程序设置\
+ACTION_QUICK_LAUNCH_SETTINGS 快速启动设置\
+ACTION_MANAGE_APPLICATIONS_SETTINGS 已下载（安装）软件列表\
+ACTION_SYNC_SETTINGS 应用程序数据同步设置\
+ACTION_NETWORK_OPERATOR_SETTINGS 可用网络搜索\
+ACTION_DATA_ROAMING_SETTINGS 移动网络设置\
+ACTION_INTERNAL_STORAGE_SETTINGS 手机存储设置\
+]]--\
+  s1.onClick=function()--点击事件\
+    s1.setCardBackgroundColor(0xFFE7E8EA)\
+    task(80,function()\
+      s1.setCardBackgroundColor(0xFfffffff)\
+    end)\
+    --输入对话框\
+    InputLayout={\
+      LinearLayout;\
+      orientation=\"vertical\";\
+      Focusable=true,\
+      FocusableInTouchMode=true,\
+      {\
+        TextView;\
+        id=\"Prompt\",\
+        textSize=\"15sp\",\
+        layout_marginTop=\"10dp\";\
+        layout_marginLeft=\"3dp\",\
+        layout_width=\"80%w\";\
+        layout_gravity=\"center\",\
+        text=\"输入线路号:\";\
+      };\
+      {\
+        EditText;\
+        hint=\"纯数字，特殊路线请输入代码\";\
+        layout_marginTop=\"5dp\";\
+        layout_width=\"80%w\";\
+        layout_gravity=\"center\",\
+        id=\"edit\";\
+      };\
+    };\
+    AlertDialog.Builder(this)\
+    .setTitle(\"设置常用出行方案一\")\
+    .setView(loadlayout(InputLayout))\
+    .setPositiveButton(\"数据源：哈尔滨公交行\",{onClick=function()\
+        local newline1=edit.Text\
+        require \"import\"\
+        import \"android.app.*\"\
+        import \"android.os.*\"\
+        import \"android.widget.*\"\
+        import \"android.view.*\"\
+        import \"android.content.Context\"\
+        import \"android.content.Intent\"\
+        import \"android.app.PendingIntent\"\
+        import \"android.app.Notification\"\
+        for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")\
+          local newway1=\"公交行\"\
+          io.open(\"/sdcard/HRB Traffic/account.docx\", 'w')\
+          local txt='【line1】'..newline1..'【line1】【way1】'..newway1..'【way1】【line2】'..line2..'【line2】【way2】'..way2..'【way2】【line3】'..line3..'【line3】【way3】'..way3..'【way3】'\
+          io.open(\"/sdcard/HRB Traffic/account.docx\",\"w+\"):write(txt):close()\
+        end\
+    end})\
+    .setNegativeButton(\"数据源：高德地图（敬请期待）\",{onClick=function()\
+        local newline1=edit.Text\
+        require \"import\"\
+        import \"android.app.*\"\
+        import \"android.os.*\"\
+        import \"android.widget.*\"\
+        import \"android.view.*\"\
+        import \"android.content.Context\"\
+        import \"android.content.Intent\"\
+        import \"android.app.PendingIntent\"\
+        import \"android.app.Notification\"\
+        for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")\
+          local newway1=\"高德地图\"\
+          io.open(\"/sdcard/HRB Traffic/account.docx\", 'w')\
+          local txt='【line1】'..newline1..'【line1】【way1】'..newway1..'【way1】【line2】'..line2..'【line2】【way2】'..way2..'【way2】【line3】'..line3..'【line3】【way3】'..way3..'【way3】'\
+          io.open(\"/sdcard/HRB Traffic/account.docx\",\"w+\"):write(txt):close()\
+        end\
+    end})\
+    .show()\
+    import \"android.view.View$OnFocusChangeListener\"\
+    edit.setOnFocusChangeListener(OnFocusChangeListener{\
+      onFocusChange=function(v,hasFocus)\
+        if hasFocus then\
+          Prompt.setTextColor(0xff1761e8)\
+        end\
+    end})\
+  end;\
+  s2.onClick=function()--点击事件\
+    s2.setCardBackgroundColor(0xFFE7E8EA)\
+    task(80,function()\
+      s2.setCardBackgroundColor(0xFfffffff)\
+    end)\
+    --输入对话框\
+    InputLayout={\
+      LinearLayout;\
+      orientation=\"vertical\";\
+      Focusable=true,\
+      FocusableInTouchMode=true,\
+      {\
+        TextView;\
+        id=\"Prompt\",\
+        textSize=\"15sp\",\
+        layout_marginTop=\"10dp\";\
+        layout_marginLeft=\"3dp\",\
+        layout_width=\"80%w\";\
+        layout_gravity=\"center\",\
+        text=\"输入线路号:\";\
+      };\
+      {\
+        EditText;\
+        hint=\"纯数字，特殊路线请输入代码\";\
+        layout_marginTop=\"5dp\";\
+        layout_width=\"80%w\";\
+        layout_gravity=\"center\",\
+        id=\"edit\";\
+      };\
+    };\
+    AlertDialog.Builder(this)\
+    .setTitle(\"设置常用出行方案一\")\
+    .setView(loadlayout(InputLayout))\
+    .setPositiveButton(\"数据源：哈尔滨公交行\",{onClick=function()\
+        local newline2=edit.Text\
+        require \"import\"\
+        import \"android.app.*\"\
+        import \"android.os.*\"\
+        import \"android.widget.*\"\
+        import \"android.view.*\"\
+        import \"android.content.Context\"\
+        import \"android.content.Intent\"\
+        import \"android.app.PendingIntent\"\
+        import \"android.app.Notification\"\
+        for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")\
+          local newway2=\"公交行\"\
+          io.open(\"/sdcard/HRB Traffic/account.docx\", 'w')\
+          local txt='【line1】'..line1..'【line1】【way1】'..way1..'【way1】【line2】'..newline2..'【line2】【way2】'..newway2..'【way2】【line3】'..line3..'【line3】【way3】'..way3..'【way3】'\
+          io.open(\"/sdcard/HRB Traffic/account.docx\",\"w+\"):write(txt):close()\
+        end\
+    end})\
+    .setNegativeButton(\"数据源：高德地图（敬请期待）\",{onClick=function()\
+        local newline2=edit.Text\
+        require \"import\"\
+        import \"android.app.*\"\
+        import \"android.os.*\"\
+        import \"android.widget.*\"\
+        import \"android.view.*\"\
+        import \"android.content.Context\"\
+        import \"android.content.Intent\"\
+        import \"android.app.PendingIntent\"\
+        import \"android.app.Notification\"\
+        for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")\
+          local newway2=\"高德地图\"\
+          io.open(\"/sdcard/HRB Traffic/account.docx\", 'w')\
+          local txt='【line1】'..line1..'【line1】【way1】'..way1..'【way1】【line2】'..newline2..'【line2】【way2】'..newway2..'【way2】【line3】'..line3..'【line3】【way3】'..way3..'【way3】'\
+          io.open(\"/sdcard/HRB Traffic/account.docx\",\"w+\"):write(txt):close()\
+        end\
+    end})\
+    .show()\
+    import \"android.view.View$OnFocusChangeListener\"\
+    edit.setOnFocusChangeListener(OnFocusChangeListener{\
+      onFocusChange=function(v,hasFocus)\
+        if hasFocus then\
+          Prompt.setTextColor(0xff1761e8)\
+        end\
+    end})\
+  end;\
+\
+\
+\
+\
+  s3.onClick=function()--点击事件\
+    s3.setCardBackgroundColor(0xFFE7E8EA)\
+    task(80,function()\
+      s3.setCardBackgroundColor(0xFfffffff)\
+    end)\
+    --输入对话框\
+    InputLayout={\
+      LinearLayout;\
+      orientation=\"vertical\";\
+      Focusable=true,\
+      FocusableInTouchMode=true,\
+      {\
+        TextView;\
+        id=\"Prompt\",\
+        textSize=\"15sp\",\
+        layout_marginTop=\"10dp\";\
+        layout_marginLeft=\"3dp\",\
+        layout_width=\"80%w\";\
+        layout_gravity=\"center\",\
+        text=\"输入线路号:\";\
+      };\
+      {\
+        EditText;\
+        hint=\"纯数字，特殊路线请输入代码\";\
+        layout_marginTop=\"5dp\";\
+        layout_width=\"80%w\";\
+        layout_gravity=\"center\",\
+        id=\"edit\";\
+      };\
+    };\
+    AlertDialog.Builder(this)\
+    .setTitle(\"设置常用出行方案一\")\
+    .setView(loadlayout(InputLayout))\
+    .setPositiveButton(\"数据源：哈尔滨公交行\",{onClick=function()\
+        local newline3=edit.Text\
+        require \"import\"\
+        import \"android.app.*\"\
+        import \"android.os.*\"\
+        import \"android.widget.*\"\
+        import \"android.view.*\"\
+        import \"android.content.Context\"\
+        import \"android.content.Intent\"\
+        import \"android.app.PendingIntent\"\
+        import \"android.app.Notification\"\
+        for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")\
+          local newway3=\"公交行\"\
+          io.open(\"/sdcard/HRB Traffic/account.docx\", 'w')\
+          local txt='【line1】'..line1..'【line1】【way1】'..way1..'【way1】【line2】'..line2..'【line2】【way2】'..way2..'【way2】【line3】'..newline3..'【line3】【way3】'..newway3..'【way3】'\
+          io.open(\"/sdcard/HRB Traffic/account.docx\",\"w+\"):write(txt):close()\
+        end\
+    end})\
+    .setNegativeButton(\"数据源：高德地图（敬请期待）\",{onClick=function()\
+        local newline3=edit.Text\
+        require \"import\"\
+        import \"android.app.*\"\
+        import \"android.os.*\"\
+        import \"android.widget.*\"\
+        import \"android.view.*\"\
+        import \"android.content.Context\"\
+        import \"android.content.Intent\"\
+        import \"android.app.PendingIntent\"\
+        import \"android.app.Notification\"\
+        for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")\
+          local newway3=\"高德地图\"\
+          io.open(\"/sdcard/HRB Traffic/account.docx\", 'w')\
+          local txt='【line1】'..line1..'【line1】【way1】'..way1..'【way1】【line2】'..line2..'【line2】【way2】'..way2..'【way2】【line3】'..newline3..'【line3】【way3】'..newway3..'【way3】'\
+          io.open(\"/sdcard/HRB Traffic/account.docx\",\"w+\"):write(txt):close()\
+        end\
+    end})\
+    .show()\
+    import \"android.view.View$OnFocusChangeListener\"\
+    edit.setOnFocusChangeListener(OnFocusChangeListener{\
+      onFocusChange=function(v,hasFocus)\
+        if hasFocus then\
+          Prompt.setTextColor(0xff1761e8)\
+        end\
+    end})\
+  end;\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+a1.onClick=function()--点击事件\
+  a1.setCardBackgroundColor(0xFFE7E8EA)\
+    task(80,function()\
+      a1.setCardBackgroundColor(0xFfffffff)\
+    end)\
+  for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")    \
+  进入子页面(\"公交行\",{链接='http://harbinbus.com/zzgjWechatPage/#/xlinfo/'..line1..'/'..line1..'%E8%B7%AF/0'})\13\
+  end\
+end;\
+\
+\
+\
+a2.onClick=function()--点击事件\
+  a2.setCardBackgroundColor(0xFFE7E8EA)\
+    task(80,function()\
+      a2.setCardBackgroundColor(0xFfffffff)\
+    end)\
+  for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")    \
+  \
+  进入子页面(\"公交行\",{链接='http://harbinbus.com/zzgjWechatPage/#/xlinfo/'..line2..'/'..line2..'%E8%B7%AF/0'})\13\
+end\
+end;\
+\
+\
+\
+\
+a3.onClick=function()--点击事件\
+  a3.setCardBackgroundColor(0xFFE7E8EA)\
+    task(80,function()\
+      a3.setCardBackgroundColor(0xFfffffff)\
+    end)\
+  for account in io.lines(\"/sdcard/HRB Traffic/account.docx\") do\
+          local content=account\
+          local line1=content:match(\"【line1】(.-)【line1】\")\
+          local way1=content:match(\"【way1】(.-)【way1】\")\
+          local line2=content:match(\"【line2】(.-)【line2】\")\
+          local way2=content:match(\"【way2】(.-)【way2】\")\
+          local line3=content:match(\"【line3】(.-)【line3】\")\
+          local way3=content:match(\"【way3】(.-)【way3】\")    \
+  \
+  进入子页面(\"公交行\",{链接='http://harbinbus.com/zzgjWechatPage/#/xlinfo/'..line3..'/'..line3..'%E8%B7%AF/0'})\13\
+end\
+end;\
+\
+\
+a4.onClick=function()--点击事件\
+  a4.setCardBackgroundColor(0xFFE7E8EA)\
+    task(80,function()\
+      a4.setCardBackgroundColor(0xFfffffff)\
+    end)\
+进入子页面(\"公交行\")\
+\
+\
+end;\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+end)\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+" ;
+      ["网页即将加载"]	= "--浏览器即将加载新的网页时执行的事件\
+\
+--接收参数\
+浏览器对象,网页链接=..." ;
+      ["网页加载完毕"]	= "--网页加载完毕后执行的事件\
+\
+--接收参数\
+浏览器对象,网页链接=..." ;
+      } ;
+  ["sidebar"]	= {
+      ["启用顶部图片"]	= false ;
+      ["items"]	= {
+          } ;
+      ["启用"]	= false ;
+      } ;
+  ["toolbar"]	= {
+      ["icon_btns"]	= {
+          } ;
+      ["搜索URL"]	= "" ;
+      ["输入栏模式"]	= true ;
+      ["启用搜索功能"]	= false ;
+      ["搜索框提示"]	= "" ;
+      ["menus"]	= {
+          } ;
+      } ;
+  ["switch"]	= {
+      ["显示状态栏"]	= true ;
+      ["横屏"]	= false ;
+      ["支持滑动页面"]	= false ;
+      ["启用启动图"]	= false ;
+      } ;
+  ["fltBtn"]	= {
+      ["图标"]	= "" ;
+      ["点击事件"]	= "--悬浮按钮点击时执行的事件" ;
+      ["显示"]	= false ;
+      } ;
+  ["web"]	= {
+      ["浏览器用户标识"]	= "默认" ;
+      ["支持打开外部应用"]	= false ;
+      ["启用进度条"]	= false ;
+      ["网页沉浸"]	= false ;
+      ["启用长按菜单"]	= false ;
+      ["启动网页"]	= "" ;
+      } ;
+  ["view_attribute"]	= {
+      ["搜索栏阴影强度"]	= "2dp" ;
+      ["侧滑栏宽度"]	= "240dp" ;
+      ["顶栏阴影强度"]	= "2dp" ;
+      ["顶栏标题"]	= "Title" ;
+      ["顶栏高度"]	= "56dp" ;
+      ["搜索栏圆角弧度"]	= "2dp" ;
+      } ;
+  ["colors"]	= {
+      ["顶栏部件"]	= "#ffffffff" ;
+      ["搜索栏部件触摸"]	= "#44000000" ;
+      ["搜索栏背景"]	= "#ffffffff" ;
+      ["悬浮按钮"]	= "#ff33a7aa" ;
+      ["搜索栏提示文字"]	= "#80000000" ;
+      ["搜索栏部件"]	= "#ff888888" ;
+      ["侧滑栏列表图标"]	= "#ff757575" ;
+      ["侧滑栏背景"]	= "#ffffffff" ;
+      ["侧滑栏列表文字"]	= "#ff333333" ;
+      ["顶栏"]	= "#ff019849" ;
+      ["悬浮按钮图标"]	= "#ffffffff" ;
+      ["进度条"]	= "#00000000" ;
+      ["顶栏部件触摸"]	= "#22ffffff" ;
+      ["导航栏"]	= "#ff2c2e43" ;
+      } ;
+  } ;

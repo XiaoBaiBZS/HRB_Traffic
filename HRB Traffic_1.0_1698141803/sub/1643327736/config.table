@@ -1,0 +1,520 @@
+{
+  ["sidebar"]	= {
+      ["启用顶部图片"]	= false ;
+      ["items"]	= {
+          } ;
+      ["启用"]	= false ;
+      } ;
+  ["events"]	= {
+      ["收到新标题"]	= "--浏览器加载新页面并获得新标题时执行的事件\
+\
+--接收参数\
+浏览器对象，新标题=..." ;
+      ["网页加载完毕"]	= "--网页加载完毕后执行的事件\
+\
+--接收参数\
+浏览器对象,网页链接=..." ;
+      ["网页即将加载"]	= "--浏览器即将加载新的网页时执行的事件\
+\
+--接收参数\
+浏览器对象,网页链接=..." ;
+      ["程序启动"]	= "\
+--/*JsHD一键生成*/\
+layout={\
+  FrameLayout,\
+  layout_width=\"fill\",\
+  layout_height=\"fill\",\
+\
+  --你的界面布局\
+  {\
+    LinearLayout,\
+    orientation=\"vertical\",\
+    layout_width=\"fill\",\
+    layout_height=\"fill\",\
+    background=\"#00ffffff\";\
+    id=\"q\";\
+    {\
+      TextView,\
+      layout_width=\"fill\",\
+      layout_height=\"fill\",\
+      gravity=\"center\",\
+      textSize=\"15sp\",\
+      text=\"\",\
+    },\
+  },\
+\
+  --帧动画布局1\
+\
+  {\
+    LinearLayout,\
+    orientation=\"vertical\",\
+    layout_width=\"fill\",\
+    layout_height=\"fill\",\
+    background=\"#ff1d8ae7\";\
+    id=\"qdy\";\
+  },\
+  {\
+    LinearLayout,\
+    orientation=\"vertical\",\
+    layout_width=\"fill\",\
+    layout_height=\"fill\",\
+    background=\"#ff1d8ae7\",\
+    gravity=\"center\",\
+    id=\"qdt\",\
+    {\
+      LinearLayout;\
+      orientation='vertical';--重力属性\
+      layout_width='fill';--布局宽度\
+      layout_height='fill';--布局高度\
+      gravity='center';--默认居中\
+      id=\"进度条布局\";\
+      {\
+        ProgressBar ;--默认圆圈\
+        id=\"进度条\";\
+      };\
+      {\
+        TextView;--文本控件\
+        layout_width='fill';--文本宽度\
+        layout_height='80dp';--文本高度\
+        id=\"qdwb\";\
+        gravity='center';--重力属性\
+        textColor='#ffffff';--文字颜色\
+        text=\"HRB Traffic\\n哈尔滨公交行\";--显示的文字\
+        textSize='30sp';--文字大小\
+      };\
+\
+      {\
+        TextView;--文本控件\
+        layout_width='fill';--文本宽度\
+        id=\"qdwb_1\";\
+        gravity='center';--重力属性\
+        textColor='#ffffff';--文字颜色\
+        text=\"正在启动...\";--显示的文字\
+        textSize='17sp';--文字大小\
+      };\
+    };\
+\
+  },\
+\
+\
+  {\
+    FrameLayout,--帧布局\
+    layout_width=\"fill\",\
+    layout_height=\"fill\", \
+    {\
+      TextView;--文本控件\
+      layout_width='fill';--文本宽度\
+      layout_height='fill';--文本高度\
+      layout_marginBottom=\"15dp\";\
+      gravity=\"center|bottom\";--重力属性\
+      textColor='#ffffff';--文字颜色\
+      id=\"版权\";\
+      text=\"Copyright © 2021-\"..os.date(\"%Y\")..\" XiaoBaiBZS.\";--显示的文字\
+      textSize='12sp';--文字大小\
+\
+    };\
+  };--帧布局\
+}\
+\
+drawerLayout.getParent().addView(loadlayout(layout))\
+function CircleButton(view,InsideColor,radiu)\
+  drawable = GradientDrawable() \
+  drawable.setShape(GradientDrawable.RECTANGLE) \
+  drawable.setColor(InsideColor)\
+  drawable.setCornerRadii({radiu,radiu,radiu,radiu,radiu,radiu,radiu,radiu});\
+  view.setBackgroundDrawable(drawable)\
+end\
+\
+import \"android.graphics.drawable.GradientDrawable\"\
+function 渐变(left_jb,right_jb,id)\
+  drawable = GradientDrawable(GradientDrawable.Orientation.TR_BL,{\
+    right_jb,--右色\
+    left_jb,--左色\
+  });\
+  id.setBackgroundDrawable(drawable)\
+end\
+\
+\
+--状态栏,导航栏背景\
+activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS).setStatusBarColor(0xff1d8ae7);\
+activity.getWindow().setNavigationBarColor(Color.parseColor(\"#ff1d8ae7\"));\
+\
+function 退出动画()\
+  task(2000,function()\
+    揭露动画一 = AnimatorSet()\
+    揭露动画一 = ViewAnimationUtils.createCircularReveal(qdt,activity.getWidth(),0,Math.hypot(activity.getWidth(),activity.getHeight())/2,0);\
+    揭露动画一.setDuration(1000)--设置动画时间\
+    揭露动画一.start()--开始动画\
+    揭露动画二 = ViewAnimationUtils.createCircularReveal(qdy,0,activity.getHeight(),Math.hypot(activity.getWidth(),activity.getHeight())/2,0);\
+    揭露动画二.setDuration(1000)--设置动画时间\
+    揭露动画二.start()--开始动画\
+    版权.setVisibility(View.GONE)\
+    --动画监听\
+    揭露动画一.addListener(Animator.AnimatorListener{\
+      onAnimationStart=function(a)\
+      end,\
+      onAnimationEnd=function(a)\
+        qdt.setVisibility(View.GONE)\
+        qdy.setVisibility(View.GONE)\
+      end,\
+      onAnimationCancel=function(a)\
+      end,\
+      onAnimationRepeat=function(a)\
+      end,\
+    })\
+\
+  end)\
+end--揭露动画--退出动画结束\
+\
+渐变(0xFF009688,0xFF2196F3,qdy) \
+渐变(0xFF009688,0xFF2196F3,qdt) \
+\
+进度条布局.setVisibility(View.VISIBLE)--显示控件\
+进度条.IndeterminateDrawable.setColorFilter(PorterDuffColorFilter(0xffffff,PorterDuff.Mode.SRC_ATOP))\
+\
+function 强制输入框(标题,消息,积极按钮名称)\
+  对话框()\
+  .设置标题(标题)\
+  .设置消息(消息)\
+  .设置积极按钮(积极按钮名称,function()\
+    loadstring([[return (canoffline or 退出程序())]])()\
+  end)\
+  .setCancelable(false)--禁用返回键\
+  .显示()\
+end\
+\
+\
+function javascript()\
+  webView.evaluateJavascript([==[window.onload=function (){//13:50-51\
+var JsHDued=function(v){try {new Function(v)();} catch(e) {setTimeout(function (){JsHDued(v);},100);};};\
+JsHDued(`document.getElementsByTagName(\"body\")[0].style.marginTop=\"0px\";`);\
+}]==],function() end)\
+end\
+\
+function webloading()\
+  task(200,function()\
+    webView.evaluateJavascript([[document.readyState]],function(a) \
+      if(a==\"\\\"complete\\\"\")then\
+        Http.get(webView.url,nil,\"utf8\",nil,function(code,html,b,c)\
+          标题文字=\"错误！\"..code\
+          if(code>=500)then\
+            jzyx=1\
+            强制输入框(标题文字,\"服务器错误，您输入的网址无法正常访问，服务器在处理请求的过程中发生了错误\",\"退出\")\
+          end\
+\
+          if(code>=400)and(code<=500)then\
+            jzyx=1\
+            强制输入框(标题文字,\"服务器错误，您输入的网址无法正常访问，服务器在处理请求的过程中发生了错误\",\"退出\")\
+          end\
+\
+          if(code<0)then--状态吗为-1无网  \
+            if(显示文字==\"无网络\")then\
+            else\
+              jzyx=1\
+              强制输入框(标题文字,\"当前网络似乎存在问题，错误返回\"..\" \"..code,\"退出\")\
+            end\
+          end\
+          if(code>=0 and code<400)then\
+            退出动画()\
+            javascript()\
+          end\
+        end)\
+      else\
+        webloading()\
+      end\
+    end)\
+  end)\
+end\
+\
+\
+\
+webloading()\
+\
+\
+\
+\
+--程序启动时会执行的事件--程序启动时会执行的事件--程序启动时会执行的事件" ;
+      } ;
+  ["web"]	= {
+      ["支持打开外部应用"]	= false ;
+      ["启动网页"]	= "http://harbinbus.com/zzgjWechatPage/#/xianlu" ;
+      ["网页沉浸"]	= true ;
+      ["浏览器用户标识"]	= "默认" ;
+      ["启用长按菜单"]	= false ;
+      ["启用进度条"]	= false ;
+      } ;
+  ["toolbar"]	= {
+      ["启用搜索功能"]	= false ;
+      ["icon_btns"]	= {
+          [1]	= {
+              ["icon"]	= "1618133982628_edit_8966063928839" ;
+              ["onClick"]	= "\
+--/*JsHD一键生成*/\
+layout={\
+  FrameLayout,\
+  layout_width=\"fill\",\
+  layout_height=\"fill\",\
+\
+  --你的界面布局\
+  {\
+    LinearLayout,\
+    orientation=\"vertical\",\
+    layout_width=\"fill\",\
+    layout_height=\"fill\",\
+    background=\"#00ffffff\";\
+    id=\"q\";\
+    {\
+      TextView,\
+      layout_width=\"fill\",\
+      layout_height=\"fill\",\
+      gravity=\"center\",\
+      textSize=\"15sp\",\
+      text=\"\",\
+    },\
+  },\
+\
+  --帧动画布局1\
+\
+  {\
+    LinearLayout,\
+    orientation=\"vertical\",\
+    layout_width=\"fill\",\
+    layout_height=\"fill\",\
+    background=\"#ff1d8ae7\";\
+    id=\"qdy\";\
+  },\
+  {\
+    LinearLayout,\
+    orientation=\"vertical\",\
+    layout_width=\"fill\",\
+    layout_height=\"fill\",\
+    background=\"#ff1d8ae7\",\
+    gravity=\"center\",\
+    id=\"qdt\",\
+    {\
+      LinearLayout;\
+      orientation='vertical';--重力属性\
+      layout_width='fill';--布局宽度\
+      layout_height='fill';--布局高度\
+      gravity='center';--默认居中\
+      id=\"进度条布局\";\
+      {\
+        ProgressBar ;--默认圆圈\
+        id=\"进度条\";\
+      };\
+      {\
+        TextView;--文本控件\
+        layout_width='fill';--文本宽度\
+        layout_height='80dp';--文本高度\
+        id=\"qdwb\";\
+        gravity='center';--重力属性\
+        textColor='#ffffff';--文字颜色\
+        text=\"HRB Traffic\\n哈尔滨公交行\";--显示的文字\
+        textSize='30sp';--文字大小\
+      };\
+\
+      {\
+        TextView;--文本控件\
+        layout_width='fill';--文本宽度\
+        id=\"qdwb_1\";\
+        gravity='center';--重力属性\
+        textColor='#ffffff';--文字颜色\
+        text=\"正在刷新...\";--显示的文字\
+        textSize='17sp';--文字大小\
+      };\
+    };\
+\
+  },\
+\
+\
+  {\
+    FrameLayout,--帧布局\
+    layout_width=\"fill\",\
+    layout_height=\"fill\", \
+    {\
+      TextView;--文本控件\
+      layout_width='fill';--文本宽度\
+      layout_height='fill';--文本高度\
+      layout_marginBottom=\"15dp\";\
+      gravity=\"center|bottom\";--重力属性\
+      textColor='#ffffff';--文字颜色\
+      id=\"版权\";\
+      text=\"Copyright © 2021-\"..os.date(\"%Y\")..\" XiaoBaiBZS.\";--显示的文字\
+      textSize='12sp';--文字大小\
+\
+    };\
+  };--帧布局\
+}\
+\
+drawerLayout.getParent().addView(loadlayout(layout))\
+function CircleButton(view,InsideColor,radiu)\
+  drawable = GradientDrawable() \
+  drawable.setShape(GradientDrawable.RECTANGLE) \
+  drawable.setColor(InsideColor)\
+  drawable.setCornerRadii({radiu,radiu,radiu,radiu,radiu,radiu,radiu,radiu});\
+  view.setBackgroundDrawable(drawable)\
+end\
+\
+import \"android.graphics.drawable.GradientDrawable\"\
+function 渐变(left_jb,right_jb,id)\
+  drawable = GradientDrawable(GradientDrawable.Orientation.TR_BL,{\
+    right_jb,--右色\
+    left_jb,--左色\
+  });\
+  id.setBackgroundDrawable(drawable)\
+end\
+\
+\
+--状态栏,导航栏背景\
+activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS).setStatusBarColor(0xff1d8ae7);\
+activity.getWindow().setNavigationBarColor(Color.parseColor(\"#ff1d8ae7\"));\
+\
+function 退出动画()\
+  task(2000,function()\
+    揭露动画一 = AnimatorSet()\
+    揭露动画一 = ViewAnimationUtils.createCircularReveal(qdt,activity.getWidth(),0,Math.hypot(activity.getWidth(),activity.getHeight())/2,0);\
+    揭露动画一.setDuration(1000)--设置动画时间\
+    揭露动画一.start()--开始动画\
+    揭露动画二 = ViewAnimationUtils.createCircularReveal(qdy,0,activity.getHeight(),Math.hypot(activity.getWidth(),activity.getHeight())/2,0);\
+    揭露动画二.setDuration(1000)--设置动画时间\
+    揭露动画二.start()--开始动画\
+    版权.setVisibility(View.GONE)\
+    --动画监听\
+    揭露动画一.addListener(Animator.AnimatorListener{\
+      onAnimationStart=function(a)\
+      end,\
+      onAnimationEnd=function(a)\
+        qdt.setVisibility(View.GONE)\
+        qdy.setVisibility(View.GONE)\
+      end,\
+      onAnimationCancel=function(a)\
+      end,\
+      onAnimationRepeat=function(a)\
+      end,\
+    })\
+\
+  end)\
+end--揭露动画--退出动画结束\
+\
+渐变(0xFF009688,0xFF2196F3,qdy) \
+渐变(0xFF009688,0xFF2196F3,qdt) \
+\
+进度条布局.setVisibility(View.VISIBLE)--显示控件\
+进度条.IndeterminateDrawable.setColorFilter(PorterDuffColorFilter(0xffffff,PorterDuff.Mode.SRC_ATOP))\
+\
+function 强制输入框(标题,消息,积极按钮名称)\
+  对话框()\
+  .设置标题(标题)\
+  .设置消息(消息)\
+  .设置积极按钮(积极按钮名称,function()\
+    loadstring([[return (canoffline or 退出程序())]])()\
+  end)\
+  .setCancelable(false)--禁用返回键\
+  .显示()\
+end\
+\
+\
+function javascript()\
+  webView.evaluateJavascript([==[window.onload=function (){//13:50-51\
+var JsHDued=function(v){try {new Function(v)();} catch(e) {setTimeout(function (){JsHDued(v);},100);};};\
+JsHDued(`document.getElementsByTagName(\"body\")[0].style.marginTop=\"0px\";`);\
+}]==],function() end)\
+end\
+\
+function webloading()\
+  task(200,function()\
+    webView.evaluateJavascript([[document.readyState]],function(a) \
+      if(a==\"\\\"complete\\\"\")then\
+        Http.get(webView.url,nil,\"utf8\",nil,function(code,html,b,c)\
+          标题文字=\"错误！\"..code\
+          if(code>=500)then\
+            jzyx=1\
+            强制输入框(标题文字,\"服务器错误，您输入的网址无法正常访问，服务器在处理请求的过程中发生了错误\",\"退出\")\
+          end\
+\
+          if(code>=400)and(code<=500)then\
+            jzyx=1\
+            强制输入框(标题文字,\"服务器错误，您输入的网址无法正常访问，服务器在处理请求的过程中发生了错误\",\"退出\")\
+          end\
+\
+          if(code<0)then--状态吗为-1无网  \
+            if(显示文字==\"无网络\")then\
+            else\
+              jzyx=1\
+              强制输入框(标题文字,\"当前网络似乎存在问题，错误返回\"..\" \"..code,\"退出\")\
+            end\
+          end\
+          if(code>=0 and code<400)then\
+            退出动画()\
+            javascript()\
+          end\
+        end)\
+      else\
+        webloading()\
+      end\
+    end)\
+  end)\
+end\
+\
+\
+\
+webloading()\
+\
+刷新网页()\
+\
+\
+--程序启动时会执行的事件--程序启动时会执行的事件--程序启动时会执行的事件" ;
+              } ;
+          [2]	= {
+              ["icon"]	= "1618133493025_edit_9111982105379" ;
+              ["onClick"]	= "网页后退()" ;
+              } ;
+          [3]	= {
+              ["icon"]	= "1618133642340_edit_9089970217883(1)" ;
+              ["onClick"]	= "退出页面()" ;
+              } ;
+          } ;
+      ["menus"]	= {
+          } ;
+      ["搜索URL"]	= "" ;
+      ["搜索框提示"]	= "" ;
+      ["输入栏模式"]	= false ;
+      } ;
+  ["switch"]	= {
+      ["横屏"]	= false ;
+      ["启用启动图"]	= false ;
+      ["显示状态栏"]	= true ;
+      ["支持滑动页面"]	= false ;
+      } ;
+  ["fltBtn"]	= {
+      ["点击事件"]	= "--悬浮按钮点击时执行的事件" ;
+      ["显示"]	= false ;
+      ["图标"]	= "" ;
+      } ;
+  ["view_attribute"]	= {
+      ["顶栏阴影强度"]	= "2dp" ;
+      ["搜索栏圆角弧度"]	= "2dp" ;
+      ["顶栏高度"]	= "65dp" ;
+      ["侧滑栏宽度"]	= "240dp" ;
+      ["顶栏标题"]	= "哈尔滨公交行" ;
+      ["搜索栏阴影强度"]	= "2dp" ;
+      } ;
+  ["colors"]	= {
+      ["悬浮按钮"]	= "#ff33a7aa" ;
+      ["导航栏"]	= "#ff2c2e43" ;
+      ["搜索栏提示文字"]	= "#80000000" ;
+      ["进度条"]	= "#00000000" ;
+      ["顶栏部件"]	= "#ffffffff" ;
+      ["搜索栏部件触摸"]	= "#44000000" ;
+      ["悬浮按钮图标"]	= "#ffffffff" ;
+      ["搜索栏背景"]	= "#ffffffff" ;
+      ["顶栏部件触摸"]	= "#22ffffff" ;
+      ["侧滑栏背景"]	= "#ffffffff" ;
+      ["侧滑栏列表文字"]	= "#ff333333" ;
+      ["顶栏"]	= "#ff019849" ;
+      ["搜索栏部件"]	= "#ff888888" ;
+      ["侧滑栏列表图标"]	= "#ff757575" ;
+      } ;
+  ["web_control"]	= {
+      } ;
+  } ;
